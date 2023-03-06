@@ -7,6 +7,8 @@ const { v4: uuidv4 } = require("uuid");
 // importing constants
 const { tokens } = require("./cache"); // Redis or some other cache system
 const { users } = require("./db"); // Database with users
+require('console-stamp')(console, '[HH:MM:ss.l]'); // Prettier Console Logs
+
 
 // defining the Express app
 const app = express();
@@ -19,6 +21,8 @@ app.use(cors());
 
 // Create Token
 app.post("/createtoken", (req, res) => {
+  console.log(`CREATE TOKEN --- Username: ${req.body.username}, Password: ${req.body.password}`)
+
   const user = users.find((u) => u.username === req.body.username);
 
   if (!user) return res.status(404).send({ error: "User not found" });
@@ -30,6 +34,8 @@ app.post("/createtoken", (req, res) => {
   // Create token
   const token = uuidv4();
 
+  console.log(`CREATE TOKEN --- Token: ${token}`)
+
   //  Save token to cache, probably for a limited time
   tokens.push(token);
 
@@ -38,6 +44,7 @@ app.post("/createtoken", (req, res) => {
 
 // Update
 app.post("/update", (req, res) => {
+  console.log(`Update --- Body: ${JSON.stringify(req.body)}`)
   // Check token
   // Should probably exist in some kind of middleware
   const bearerHeader = req.headers["authorization"];
@@ -47,6 +54,8 @@ app.post("/update", (req, res) => {
 
   const bearer = bearerHeader.split(" ");
   const bearerToken = bearer[1];
+
+  console.log(`Update --- Token: ${bearerToken}`)
 
   if (!tokens.includes(bearerToken))
     return res.status(403).send({ error: "Token does not exist" });
