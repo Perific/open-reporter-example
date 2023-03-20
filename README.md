@@ -8,12 +8,12 @@
 * npm or yarn installed
 
 #### Start
-1. Fork or clone the repository
-2. Run `npm install` or `yarn` to install packages
-3. Create a new database in MySql
-    3.1. Import the `user.sql` file
-    3.2. Create a .env file (see [example env](.env.example)) with your credentials
-4. Start the server with `npm run dev` or `yarn dev`
+* Fork or clone the repository
+*  Run `npm install` or `yarn` to install packages
+*  Create a new database in MySql
+    * Import the `user.sql` file
+    * Create a .env file (see [example env](.env.example)) with your credentials
+* Start the server with `npm run dev` or `yarn dev`
 
 ### Purpose
 
