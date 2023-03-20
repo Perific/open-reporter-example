@@ -1,14 +1,21 @@
 // importing the dependencies
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const { v4: uuidv4 } = require("uuid");
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
 
-// importing constants
-const { tokens } = require("./cache"); // Redis or some other cache system
-const { users } = require("./db"); // Database with users
-require('console-stamp')(console, '[HH:MM:ss.l]'); // Prettier Console Logs
+import cons from "console-stamp";
 
+// Enable environment
+import "dotenv/config.js";
+
+// importing functions
+import tokens from "./cache.js"; // Redis or some other cache system
+import createUser from "./requests/createUser.js";
+import createToken from "./requests/createToken.js";
+import update from "./requests/update.js";
+
+// Prettier Console Logs
+cons(console,  "[HH:MM:ss.l]");
 
 // defining the Express app
 const app = express();
@@ -17,53 +24,20 @@ const app = express();
 app.use(bodyParser.json());
 
 // enabling CORS for all requests
-app.use(cors({
-  origin: '*'
-}));
+app.use(
+  cors({
+    origin: "*",
+  })
+);
+
+// Create user
+app.post("/createuser", createUser);
 
 // Create Token
-app.post("/createtoken", (req, res) => {
-  console.log(`CREATE TOKEN --- Username: ${req.body.username}, Password: ${req.body.password}`)
-
-  const user = users.find((u) => u.username === req.body.username);
-
-  if (!user) return res.status(404).send({ error: "User not found" });
-
-  // Passwords should be hashed in database and compared to incoming password
-  if (user.password !== req.body.password)
-    return res.status(401).send({ error: "Unauthorized" });
-
-  // Create token
-  const token = uuidv4();
-
-  console.log(`CREATE TOKEN --- Token: ${token}`)
-
-  //  Save token to cache, probably for a limited time
-  tokens.push(token);
-
-  res.send({ token: token });
-});
+app.post("/createtoken", createToken);
 
 // Update
-app.post("/update", (req, res) => {
-  console.log(`Update --- Body: ${JSON.stringify(req.body)}`)
-  // Check token
-  // Should probably exist in some kind of middleware
-  const bearerHeader = req.headers["authorization"];
-
-  if (typeof bearerHeader === "undefined")
-    return res.status(403).send({ error: "Token not provided" });
-
-  const bearer = bearerHeader.split(" ");
-  const bearerToken = bearer[1];
-
-  console.log(`Update --- Token: ${bearerToken}`)
-
-  if (!tokens.includes(bearerToken))
-    return res.status(403).send({ error: "Token does not exist" });
-
-  return res.status(200).send({ success: true });
-});
+app.post("/update", update);
 
 // starting the server
 app.listen(3001, () => {

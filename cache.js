@@ -1,3 +1,3 @@
 const tokens = [];
 
-exports.tokens = tokens;
+export default tokens;
