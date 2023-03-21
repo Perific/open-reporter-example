@@ -38,7 +38,7 @@ The Update request body, this is what we send to you through the update endpoint
 | externalid | string | A reference to your internal user or installation |
 | reporterid | number | The ID of the installation in our system |
 | timestamp | date time | The timestamp of when we sent the object |
-| protopcolversion | string | - |
+| protocolversion | string | - |
 | meterstatus | [MeterStatus Enum](#meterstatus) | The status of all the meters in the installation |
 | calculationmode | [CalculationModes Enum](#calculationmodes) | The type of calculations done on the meter data in the enegic backend |
 | calculated | [Calculated](#calculated) | Calculated values based on all meters |
@@ -57,7 +57,7 @@ The Update request body, this is what we send to you through the update endpoint
 
 | Property | Description |
 | -------- |------- |
-| OpenLoop | We send the raw values, meaning there is no smart stepping up or down in |
+| OpenLoop | We send the raw values |
 
 #### Calculated
 
@@ -69,7 +69,7 @@ The Update request body, this is what we send to you through the update endpoint
 #### Meters
 | Property | Type | Description |
 | -------- |------- | ------- |
-| lasteupdate | date time | When this specific meter was last updated |
+| lastupdate | date time | When this specific meter was last updated |
 | monitorid | number | Enegics internal ID of the monitor/measuring device |
 | type | string | If the device is measuring "consumption" or "production" of electricity | 
 | fuse | number | the fuse level this measuring device is  attached to |
