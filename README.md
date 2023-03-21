@@ -38,7 +38,7 @@ The Update request body, this is what we send to you through the update endpoint
 | externalid | string | A reference to your internal user or installation |
 | reporterid | number | The ID of the installation in our system |
 | timestamp | date time | The timestamp of when we sent the object |
-| protocolversion | string | - |
+| protocolversion | string | The version of this packet, if this changes there might be changes to this format. |
 | meterstatus | [MeterStatus Enum](#meterstatus) | The status of all the meters in the installation |
 | calculationmode | [CalculationModes Enum](#calculationmodes) | The type of calculations done on the meter data in the enegic backend |
 | calculated | [Calculated](#calculated) | Calculated values based on all meters |
