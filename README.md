@@ -32,7 +32,7 @@ This projects purpose is to show in a very simple way what we expect from the tw
     * Accepts a 'Authorization' header with a bearer token. If the token is expired or not accepted, we expect a 401 (Unauthorized) or 403 (Forbidden) response. In this case we will run "Create Token" again.
     Example: `"Authorization": "Bearer <TOKEN>"`
 
-The Update request body, this is what we send to you through the update endpoint.
+The Update request body, this is what we send to you through the update endpoint. [Example Json](/updatePacketExample.json)
 | Property | Type | Description |
 | -------- | -------- | ------- | 
 | externalid | string | A reference to your internal user or installation |
@@ -74,6 +74,9 @@ The Update request body, this is what we send to you through the update endpoint
 | type | string | If the device is measuring "consumption" or "production" of electricity | 
 | fuse | number | the fuse level this measuring device is  attached to |
 | online | boolean | If the meter is considered online or not. This is based on how long ago the  last packet enegics system received |
+| l1 | number | The measurement value of Phase 1 |
+| l2 | number | The measurement value of Phase 2 |
+| l3 | number | The measurement value of Phase 3 |
 
 #### Phases
 | Property | Type | Description |
