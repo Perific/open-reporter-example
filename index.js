@@ -9,7 +9,6 @@ import cons from "console-stamp";
 import "dotenv/config.js";
 
 // importing functions
-import tokens from "./cache.js"; // Redis or some other cache system
 import createUser from "./requests/createUser.js";
 import createToken from "./requests/createToken.js";
 import update from "./requests/update.js";
