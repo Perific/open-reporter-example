@@ -25,6 +25,8 @@ export default async function update(req, res) {
     let decoded;
     try {
       decoded = jwt.verify(bearerToken, JWT_SECRET);
+
+      console.log(`Update --- Decoded: ${JSON.stringify(decoded)}`)
     } catch (err) {
       return res.status(401).send({ error: "Invalid Token" });
     }

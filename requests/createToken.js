@@ -30,12 +30,25 @@ export default async function createToken(req, res) {
     if (!(await compare(req.body.password, user.password)))
       return res.status(401).send({ error: "Unauthorized" });
 
+    // Check if user has token and if that token is still valid return it
+    if (user.token) {
+      try {
+        const decoded = jwt.verify(user.token, JWT_SECRET);
+
+        if (decoded.username === user.username)
+          return res.send({ token: user.token });
+      } catch (err) {
+        console.error('Invalid Token: ',err);
+      }
+    }
+
     // Create token
     const token = jwt.sign(
       { userId: user.id, username: user.username },
       JWT_SECRET,
       {
-        expiresIn: 1000 * 60 * 60 * 24 * 30, // 30 days in ms
+        expiresIn: 60 * 60 * 24 * 30, // 30 days in s
+        // expiresIn: 2 * 60, // 2 mins in s
       }
     );
 
