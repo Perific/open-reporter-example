@@ -57,7 +57,7 @@ The Update request body, this is what we send to you through the update endpoint
 
 | Property | Description |
 | -------- |------- |
-| openloop | We send the raw values |
+| openloop | Power levels and values are sent “as is” as well as available current compared only to the main fuse level, but the target system is expected to do calculation on how much power is available for charging and adjust charging levels accordingly if needed. |
 
 #### Calculated
 
@@ -72,8 +72,8 @@ The Update request body, this is what we send to you through the update endpoint
 | lastupdate | date time | When this specific meter was last updated |
 | monitorid | number | Enegics internal ID of the monitor/measuring device |
 | type | string | If the device is measuring "consumption" or "production" of electricity | 
-| fuse | number | the fuse level this measuring device is  attached to |
-| online | boolean | If the meter is considered online or not. This is based on how long ago the  last packet enegics system received |
+| fuse | number | Fuse level of the location for the measurement. This value is configured in the Reporter Settings section in the Enegic app. |
+| online | boolean | If the meter is considered online or not. This is based on how long ago the last packet enegics system received |
 | l1 | number | The measurement value of Phase 1 |
 | l2 | number | The measurement value of Phase 2 |
 | l3 | number | The measurement value of Phase 3 |
