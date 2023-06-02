@@ -5,7 +5,7 @@
       "l2": 16.2,
       "l3": 16.3,
       "fuse": 25,
-      "type": "Consumption",
+      "type": "consumption",
       "online": true,
       "monitorid": 1110987654321,
       "lastupdate": "2023-03-21T15:58:50Z"
@@ -19,6 +19,6 @@
   "externalid": "abcdefg123456",
   "reporterid": 1234567891011,
   "meterstatus": "online",
-  "calculationmode": "OpenLoop",
+  "calculationmode": "openloop",
   "protocolversion": "010"
 }
