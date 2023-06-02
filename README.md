@@ -57,7 +57,7 @@ The Update request body, this is what we send to you through the update endpoint
 
 | Property | Description |
 | -------- |------- |
-| OpenLoop | We send the raw values |
+| openloop | We send the raw values |
 
 #### Calculated
 
